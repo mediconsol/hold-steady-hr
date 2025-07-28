@@ -50,7 +50,7 @@ export function AppSidebar() {
   const getNavCls = ({ isActive }: { isActive: boolean }) =>
     isActive 
       ? "bg-gradient-primary text-primary-foreground shadow-glow font-medium" 
-      : "hover:bg-muted/50 hover:shadow-sm transition-smooth"
+      : "!text-gray-800 hover:bg-muted/50 hover:shadow-sm transition-smooth"
 
   return (
     <Sidebar
@@ -65,8 +65,8 @@ export function AppSidebar() {
             </div>
             {!collapsed && (
               <div>
-                <h2 className="font-bold text-foreground">붙잡는 병원</h2>
-                <p className="text-xs text-muted-foreground">조직문화 플랫폼</p>
+                <h2 className="font-bold text-gray-900">메디HR+</h2>
+                <p className="text-xs text-gray-600">조직문화 플랫폼</p>
               </div>
             )}
           </div>
@@ -76,7 +76,7 @@ export function AppSidebar() {
         <SidebarGroup
           className="px-2"
         >
-          <SidebarGroupLabel className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+          <SidebarGroupLabel className="text-xs font-semibold text-gray-700 uppercase tracking-wider">
             {!collapsed && "주요 기능"}
           </SidebarGroupLabel>
           <SidebarGroupContent>
@@ -89,8 +89,8 @@ export function AppSidebar() {
                       end 
                       className={getNavCls}
                     >
-                      <item.icon className={`h-5 w-5 ${collapsed ? '' : 'mr-3'}`} />
-                      {!collapsed && <span>{item.title}</span>}
+                      <item.icon className={`h-5 w-5 ${collapsed ? '' : 'mr-3'} !text-gray-800`} />
+                      {!collapsed && <span className="!text-gray-800">{item.title}</span>}
                     </NavLink>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
@@ -103,7 +103,7 @@ export function AppSidebar() {
         <SidebarGroup
           className="px-2"
         >
-          <SidebarGroupLabel className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+          <SidebarGroupLabel className="text-xs font-semibold text-gray-700 uppercase tracking-wider">
             {!collapsed && "직원 관리"}
           </SidebarGroupLabel>
           <SidebarGroupContent>
@@ -115,8 +115,8 @@ export function AppSidebar() {
                       to={item.url} 
                       className={getNavCls}
                     >
-                      <item.icon className={`h-5 w-5 ${collapsed ? '' : 'mr-3'}`} />
-                      {!collapsed && <span>{item.title}</span>}
+                      <item.icon className={`h-5 w-5 ${collapsed ? '' : 'mr-3'} !text-gray-800`} />
+                      {!collapsed && <span className="!text-gray-800">{item.title}</span>}
                     </NavLink>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
@@ -134,8 +134,8 @@ export function AppSidebar() {
                   to="/settings" 
                   className={getNavCls}
                 >
-                  <Settings className={`h-5 w-5 ${collapsed ? '' : 'mr-3'}`} />
-                  {!collapsed && <span>설정</span>}
+                  <Settings className={`h-5 w-5 ${collapsed ? '' : 'mr-3'} !text-gray-800`} />
+                  {!collapsed && <span className="!text-gray-800">설정</span>}
                 </NavLink>
               </SidebarMenuButton>
             </SidebarMenuItem>

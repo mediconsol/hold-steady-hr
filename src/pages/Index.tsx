@@ -1,10 +1,13 @@
+import { useState } from "react"
+import { useNavigate } from "react-router-dom"
 import { 
   Activity, 
   Users, 
   TrendingUp, 
   AlertTriangle,
   Heart,
-  BarChart3
+  BarChart3,
+  PlayCircle
 } from "lucide-react"
 import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar"
 import { AppSidebar } from "@/components/layout/AppSidebar"
@@ -13,8 +16,15 @@ import { StatsCard } from "@/components/dashboard/StatsCard"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import heroImage from "@/assets/hero-medical.jpg"
+import { SurveyModal } from "@/components/SurveyModal"
+import Footer from "@/components/layout/Footer"
+import DemoNotice from "@/components/DemoNotice"
+import ContactModal from "@/components/ContactModal"
 
 const Index = () => {
+  const [isSurveyOpen, setIsSurveyOpen] = useState(false)
+  const navigate = useNavigate()
+
   return (
     <SidebarProvider>
       <div className="min-h-screen flex w-full bg-background">
@@ -36,18 +46,25 @@ const Index = () => {
                 <div className="max-w-2xl">
                   <div className="flex items-center gap-3 mb-4">
                     <Heart className="w-8 h-8" />
-                    <h1 className="text-3xl lg:text-4xl font-bold">붙잡는 병원 플랫폼</h1>
+                    <h1 className="text-3xl lg:text-4xl font-bold">메디HR+</h1>
                   </div>
                   <p className="text-lg lg:text-xl text-primary-foreground/90 mb-6">
                     직원 만족도 조사와 데이터 분석을 통한 조직문화 개선 솔루션
                   </p>
-                  <div className="flex gap-4">
-                    <Button variant="secondary" size="lg" className="shadow-card">
-                      새 설문 만들기
+                  <div className="flex flex-wrap gap-4">
+                    <Button variant="secondary" size="lg" className="shadow-card" onClick={() => navigate('/surveys')}>
+                      AI와 함께 설문 만들기
                     </Button>
-                    <Button variant="outline" size="lg" className="border-white/30 text-white hover:bg-white/10">
-                      리포트 보기
+                    <Button 
+                      size="lg" 
+                      className="bg-gradient-to-r from-orange-400 to-amber-500 hover:from-orange-500 hover:to-amber-600 text-white border-0 shadow-lg hover:shadow-2xl transform hover:scale-102 transition-all duration-500 ease-in-out hover:brightness-110 font-semibold relative overflow-hidden group"
+                      onClick={() => setIsSurveyOpen(true)}
+                    >
+                      <div className="absolute inset-0 bg-gradient-to-r from-orange-300 to-amber-400 opacity-0 group-hover:opacity-20 transition-opacity duration-500"></div>
+                      <PlayCircle className="w-5 h-5 mr-2 transition-transform duration-700 group-hover:rotate-12" />
+                      설문 체험하기
                     </Button>
+                    <ContactModal />
                   </div>
                 </div>
               </div>
@@ -124,7 +141,7 @@ const Index = () => {
                       </div>
                     ))}
                   </div>
-                  <Button variant="outline" className="w-full mt-4">
+                  <Button variant="outline" className="w-full mt-4" onClick={() => navigate('/surveys')}>
                     모든 설문 보기
                   </Button>
                 </CardContent>
@@ -140,19 +157,19 @@ const Index = () => {
                 </CardHeader>
                 <CardContent>
                   <div className="grid grid-cols-2 gap-4">
-                    <Button variant="dashboard" className="h-20 flex-col gap-2">
+                    <Button variant="dashboard" className="h-20 flex-col gap-2" onClick={() => navigate('/employees')}>
                       <Users className="w-6 h-6" />
-                      <span className="text-sm">직원 추가</span>
+                      <span className="text-sm">직원 관리</span>
                     </Button>
-                    <Button variant="dashboard" className="h-20 flex-col gap-2">
+                    <Button variant="dashboard" className="h-20 flex-col gap-2" onClick={() => navigate('/surveys')}>
                       <BarChart3 className="w-6 h-6" />
-                      <span className="text-sm">설문 생성</span>
+                      <span className="text-sm">설문 관리</span>
                     </Button>
-                    <Button variant="dashboard" className="h-20 flex-col gap-2">
+                    <Button variant="dashboard" className="h-20 flex-col gap-2" onClick={() => navigate('/reports')}>
                       <TrendingUp className="w-6 h-6" />
-                      <span className="text-sm">리포트 생성</span>
+                      <span className="text-sm">리포트 분석</span>
                     </Button>
-                    <Button variant="dashboard" className="h-20 flex-col gap-2">
+                    <Button variant="dashboard" className="h-20 flex-col gap-2" onClick={() => alert('기능구현중')}>
                       <AlertTriangle className="w-6 h-6" />
                       <span className="text-sm">알림 설정</span>
                     </Button>
@@ -202,9 +219,23 @@ const Index = () => {
                 </div>
               </CardContent>
             </Card>
+
+            {/* Demo Notice Section - Only on main page */}
+            <div className="mt-12">
+              <DemoNotice />
+            </div>
+
+            {/* Footer */}
+            <Footer />
           </main>
         </SidebarInset>
       </div>
+      
+      {/* Survey Modal */}
+      <SurveyModal 
+        isOpen={isSurveyOpen} 
+        onClose={() => setIsSurveyOpen(false)} 
+      />
     </SidebarProvider>
   );
 };

@@ -43,7 +43,7 @@ export function Header() {
               </div>
               <div className="text-left">
                 <p className="text-sm font-medium">관리자</p>
-                <p className="text-xs text-muted-foreground">admin@hospital.com</p>
+                <p className="text-xs text-muted-foreground">admin@mediconsol.com</p>
               </div>
             </Button>
           </DropdownMenuTrigger>
